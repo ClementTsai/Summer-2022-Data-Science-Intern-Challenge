@@ -29,6 +29,9 @@ GROUP BY e.EmployeeID)
 
 --The last name of the employee with the most orders was Peacock with 40 orders
 
+
+
+
 --What product was ordered the most by customers in Germany?
 —-Finding the most ordered product
 SELECT ProductName AS 'Product Name', MAX(Total) AS 'Amount Ordered'
