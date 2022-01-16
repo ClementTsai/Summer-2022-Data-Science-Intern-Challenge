@@ -1,4 +1,4 @@
-These are my responses to the Shopify Summer 2022 Data Science Intern Challenge
+The responses to the Shopify Summer 2022 Data Science Intern Challenge can be found in links below the question.
 
 ### Question 1: Given some sample data, write a program to answer the following: click here to access the required data set
 
@@ -8,9 +8,13 @@ Think about what could be going wrong with our calculation. Think about a better
 What metric would you report for this dataset?
 What is its value?
 
+(Full response)[https://github.com/ClementTsai/Summer-2022-Data-Science-Intern-Challenge/blob/master/q1.md]
+
 
 ### Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
 
-How many orders were shipped by Speedy Express in total?
-What is the last name of the employee with the most orders?
-What product was ordered the most by customers in Germany?
+How many orders were shipped by Speedy Express in total? **54 Orders were shipped by Speedy Express**
+What is the last name of the employee with the most orders? **The last name of the employee with the most orders was Peacock with 40 orders**
+What product was ordered the most by customers in Germany? **The most ordered product by customers in Germany was the Boston Crab Meat with 160 orders**
+
+(Response in detail)[https://github.com/ClementTsai/Summer-2022-Data-Science-Intern-Challenge/blob/master/q2.sql]
