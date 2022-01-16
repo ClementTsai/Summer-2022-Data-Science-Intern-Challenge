@@ -4,11 +4,11 @@
 
 --Find number of orders shipped by Speedy Express
 SELECT COUNT(OrderID) AS 'Amt Shipped by Speedy Express'
-–-Join relevant tables
+/*Join relevant tables*/
 FROM Orders o
 JOIN Shippers s
 ON o.ShipperID = s.ShipperID
-–-On the condition that the Shipper is Speedy Express
+/*On the condition that the Shipper is Speedy Express*/
 WHERE s.ShipperName LIKE 'Speedy Express';
 
 --54 Orders were shipped by Speedy Express
@@ -17,9 +17,9 @@ WHERE s.ShipperName LIKE 'Speedy Express';
 
 
 --What is the last name of the employee with the most orders?
-—-Find the the employee with the MOST CountTotals
+/*Find the the employee with the MOST CountTotals*/
 SELECT LastName AS "Last Name", MAX(CountTotal) AS "Amount Sold"
-—-Finding the collective amount of ALL orders for all employees
+/*Finding the collective amount of ALL orders for all employees*/
 FROM(SELECT Count(o.OrderID) AS CountTotal, e.LastName
 FROM Orders o
 JOIN Employees e
@@ -31,15 +31,15 @@ GROUP BY e.EmployeeID)
 --What product was ordered the most by customers in Germany?
 —-Finding the most ordered product
 SELECT ProductName AS 'Product Name', MAX(Total) AS 'Amount Ordered'
-—-Finding the quantity of ALL ordered products
+/*Finding the quantity of ALL ordered products*/
 FROM(SELECT SUM(Quantity) AS Total, ProductName
-—-Joining relevant tables
+/*Joining relevant tables*/
 FROM(SELECT c.CustomerID, c.Country, o.OrderID, p.ProductID, od.Quantity, p.ProductName
 	FROM Customers c
 	JOIN Orders o ON o.CustomerID = c.CustomerID
 	JOIN OrderDetails od ON od.OrderID = o.OrderID
 	JOIN Products p ON p.ProductID = od.ProductID
-—-On the condition that the orders are from Germany
+/*On the condition that the orders are from Germany*/
 WHERE c.Country LIKE 'Germany')
 GROUP BY ProductID)
 
