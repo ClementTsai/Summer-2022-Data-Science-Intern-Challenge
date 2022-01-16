@@ -2,27 +2,52 @@
 title: "Q1"
 output: github_document
 ---
+# Question 1: Given some sample data, write a program to answer the following: click here to access the required data set
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+On Shopify, we have exactly 100 sneaker shops, and each of these shops sells only one model of shoe. We want to do some analysis of the average order value (AOV). When we look at orders data over a 30 day window, we naively calculate an AOV of $3145.13. Given that we know these shops are selling sneakers, a relatively affordable item, something seems wrong with our analysis. 
+
+### Think about what could be going wrong with our calculation. Think about a better way to evaluate this data. 
+
+First, we need to ask ourselves why the Average Order Value was previously calculated incorrectly. By dividing the sum of the "order_amount" by the number of orders present across all 100 shops, we end up with a mean of $3145.13. However, we are trying to find the average dollar amount spent each time a customer places an order, and not the mean value of the total order amount.
+
+```{r, include=FALSE}
+library("readxl")
+library("dplyr")
+library("ggplot2")
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+data <- read_excel("~/Downloads/2019 Winter Data Science Intern Challenge Data Set.xlsx")
+glimpse(data) 
 ```
 
-## Including Plots
+```{r}
+ggplot(data=data, aes(x=shop_id,y=order_amount, group = 1)) +
+  geom_boxplot(outlier.colour="black", outlier.shape=16, outlier.size=2, notch=FALSE) +
+  labs(title = "Boxplot", subtitle = "without outliers removed", x = " ", y = "Order Amount") +
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank())
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+ggplot(data=data, aes(x=shop_id,y=order_amount, group = 1)) +
+  geom_boxplot(outlier.colour="black", outlier.shape=16, outlier.size=2, notch=FALSE) +
+  coord_cartesian(ylim = quantile(data$order_amount, c(0.10, 0.90))) +
+  labs(title = "Boxplot", subtitle = "with outliers removed", x = " ", y = "Order Amount") +
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank())
 ```
+When we view the two graphs, it is no wonder why the previously calculated mean of $3145.13 was so high. In shops 42 and 78, they both have a large “order_amount” in comparison to the other 98 shops. Consequently, both shops 42 and 78 also have a much larger AOV.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Therefore, a better way to evaluate this data would be to find the AOV of each individual shop, then find the median of the collective AOV.
+
+```{r}
+data_aov <- data %>%
+  group_by(shop_id) %>%
+  summarize(aov = sum(order_amount)/(length(order_id)))
+
+median(data_aov$aov)
+```
+### What metric would you report for this dataset?
+Why the median? If we were to use the mean or average of the order value, it would continue to be heavily influenced by the extreme outliers in shops 42 and 78. By using the median as the metric, we are able to discern the “typical” value without having the proportions of shops 42 and 78 skewing its value.
+
+### What is its value?
+The median order value is $308.8898, a more reasonable calculation for a relatively affordable item.
+
+
