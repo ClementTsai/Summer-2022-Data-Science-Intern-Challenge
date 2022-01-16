@@ -1,4 +1,5 @@
---Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
+/*Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. 
+Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.*/
 
 --How many orders were shipped by Speedy Express in total?
 
@@ -19,7 +20,7 @@ WHERE s.ShipperName LIKE 'Speedy Express';
 --What is the last name of the employee with the most orders?
 /*Find the the employee with the MOST CountTotals*/
 SELECT LastName AS "Last Name", MAX(CountTotal) AS "Amount Sold"
-/*Finding the collective amount of ALL orders for all employees*/
+/*Finding the collective amount of ALL orders for ALL employees, while joining all relevant tables*/
 FROM(SELECT Count(o.OrderID) AS CountTotal, e.LastName
 FROM Orders o
 JOIN Employees e
