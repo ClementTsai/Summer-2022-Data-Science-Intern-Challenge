@@ -9,7 +9,7 @@ What metric would you report for this dataset?
 What is its value?
 
 
-[Response with RStudio](https://github.com/ClementTsai/Summer-2022-Data-Science-Intern-Challenge/blob/master/q1.md)
+[Response with RStudio](https://github.com/ClementTsai/Summer-2022-Data-Science-Intern-Challenge/blob/master/q1.md#q1)
 
 
 ### Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
